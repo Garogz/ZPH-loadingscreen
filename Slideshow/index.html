@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="ZPH Garry's Mod server loading screen" />
+        <link rel="stylesheet" href="style.css" />
+        <title>ZPH Garry's Mod server loading screen</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    </head>
+    <body>
+        <!--Begin slideshow background-->
+        <div class="slideshow">
+            <div class="slide" style="background-image: url('https://gallery.zeropingheroes.co.uk/uploads/medium/9e/ae/fe07615286692f4c5ca39a94ab4c.jpg');"></div>
+            <div class="slide" style="background-image: url('https://gallery.zeropingheroes.co.uk/uploads/medium/20/c0/de7400c12a356ffce55af2933448.jpg');"></div>
+            <div class="slide" style="background-image: url('https://gallery.zeropingheroes.co.uk/uploads/medium/bc/72/eb58f1271057b6c827ff11a9cde6.jpg');"></div>
+            <div class="slide" style="background-image: url('https://gallery.zeropingheroes.co.uk/uploads/medium/5b/98/32eefdc3be2d1b620ca6b602b947.jpg');"></div>
+        </div>
+        <!--End slideshow background-->
+
+        <div class="vignette"></div>
+
+        <!--Begin centre title card with logo-->
+        <div class="zph-center-layer" aria-hidden="false">
+            <section class="zph-card" role="region" aria-labelledby="zph-title">
+                <div class="zph-card__logo">
+                    <img src="https://zeropingheroes.co.uk/wp-content/uploads/2016/05/cropped-ZPH-512x512-300x160.png" alt="ZPH logo" />
+                </div>
+                <div class="zph-card__text">
+                    <h1 id="zph-title" class="zph-card__title">Zero Ping Heroes</h1>
+                    <p class="zph-card__subtitle">Sussex's LAN Party Community</p>
+                </div>
+            </section>
+        </div>
+        <!--End loading bar and details-->
+
+        <!--Begin loading bar and details-->
+        <div class="zph-hud">
+          <div class="zph-hud__row">
+              <div class="zph-hud__item"><strong>Map:</strong> <span id="zph-map">—</span></div>
+              <div class="zph-hud__item"><strong>Players:</strong> <span id="zph-players">—</span></div>
+              <div class="zph-hud__item"><strong>Gamemode:</strong> <span id="zph-gamemode">—</span></div>
+          </div>
+
+          <div class="zph-progress" aria-label="Download progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="zph-progress__bar" id="zph-progress-bar" style="width:0%"></div>
+          </div>
+
+          <div class="zph-status">
+              <div class="zph-status__label">Status:</div>
+              <div class="zph-status__text" id="zph-status">Waiting for game…</div>
+          </div>
+
+          <div class="zph-file">
+              <div class="zph-file__label">Downloading:</div>
+              <div class="zph-file__name" id="zph-file">—</div>
+          </div>
+        </div>
+        <!--End loading bar and details-->
+        <audio id="bgm" src="./LEVEL_SELECT_KLICKAUD-edited.mp3" autoplay loop></audio>
+        <div class="now-playing">
+            <img id="np-cover" src="https://i1.sndcdn.com/artworks-RUgDTQsWvyfLKkDf-uez1Rw-t1080x1080.jpg" alt="Album Cover">
+            <div class="np-text">
+                <div class="np-label">Now Playing...</div>
+                <div id="np-title" class="np-title">LEVEL SELECT</div>
+                <div id="np-artist" class="np-artist">Pizza Hotline </div>
+            </div>
+        </div>
+    </body>
+</html>
