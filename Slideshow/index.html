@@ -59,6 +59,8 @@
           </div>
         </div>
         <!--End loading bar and details-->
+        
+        <!--Begin audio and now-playing music box-->
         <audio id="bgm" src="https://garogz.github.io/ZPH-loadingscreen/Slideshow/LEVEL_SELECT_KLICKAUD-edited.mp3" autoplay loop></audio>
         <div class="now-playing">
             <img id="np-cover" src="https://i1.sndcdn.com/artworks-RUgDTQsWvyfLKkDf-uez1Rw-t1080x1080.jpg" alt="Album Cover">
@@ -68,5 +70,73 @@
                 <div id="np-artist" class="np-artist">Pizza Hotline </div>
             </div>
         </div>
+        <!--End audio and now-playing music box-->
+        
+        <!--Begin PHP script for loading bar details to work-->
+        <script>
+            // --------- Minimal state ---------
+            var state = {
+              total: 0,   // total files
+              needed: 0   // files left (includes current)
+            };
+
+            // Helpers to update DOM safely
+            function $(id) { return document.getElementById(id); }
+            function setText(id, text) {
+              var el = $(id);
+              if (el) el.textContent = text;
+            }
+
+            function updateProgress() {
+              if (!state.total || state.total < 1) {
+                $('zph-progress-bar').style.width = '0%';
+                $('zph-progress-bar').setAttribute('aria-valuenow', '0');
+                return;
+              }
+              var completed = Math.max(0, state.total - state.needed);
+              var pct = Math.round((completed / state.total) * 100);
+              $('zph-progress-bar').style.width = pct + '%';
+              $('zph-progress-bar').setAttribute('aria-valuenow', String(pct));
+            }
+
+            // --------- Functions GMod will call ---------
+            // Called once near the start with general info
+            function GameDetails(serverName, serverURL, mapName, maxPlayers, steamID, gamemode, volume, language) {
+              setText('zph-map', mapName || 'Unknown');
+              setText('zph-players', String(maxPlayers || '—'));
+              setText('zph-gamemode', gamemode || '—');
+            }
+
+            // Total number of files to download this session
+            function SetFilesTotal(total) {
+              state.total = Number(total) || 0;
+              if (state.needed === 0) state.needed = state.total;
+              updateProgress();
+            }
+
+            // Files remaining (including current file)
+            function SetFilesNeeded(needed) {
+              state.needed = Math.max(0, Number(needed) || 0);
+              updateProgress();
+            }
+
+            // Called when a file begins downloading
+            function DownloadingFile(filename) {
+              setText('zph-file', filename || '—');
+            }
+
+            // Called when the overall status text changes
+            function SetStatusChanged(status) {
+              setText('zph-status', status || '—');
+            }
+
+            // Expose for GMod
+            window.GameDetails = GameDetails;
+            window.SetFilesTotal = SetFilesTotal;
+            window.SetFilesNeeded = SetFilesNeeded;
+            window.DownloadingFile = DownloadingFile;
+            window.SetStatusChanged = SetStatusChanged;
+        </script>
+        <!--End PHP script for loading bar details to work-->
     </body>
 </html>
